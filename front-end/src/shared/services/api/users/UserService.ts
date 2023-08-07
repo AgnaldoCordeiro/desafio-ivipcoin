@@ -19,7 +19,7 @@ const getById = async (id: string): Promise<IDetalheUser | Error> => {
     return new Error("Erro ao consultar o usuário.")
 
   } catch (error) {
-    console.error(error);
+   
     return new Error((error as { message: string }).message || "Erro ao consultar o usuário.")
 
   }
@@ -37,7 +37,7 @@ const create = async (dados: Omit<IDetalheUser, 'id'>): Promise<string | Error> 
     return new Error("Erro ao cadastrar o usuário.")
 
   } catch (error) {
-    console.error(error);
+   
     return new Error((error as { message: string }).message || "Erro ao cadastrar o usuário.")
 
   }
@@ -50,7 +50,7 @@ const updateById = async (dados: IDetalheUser): Promise<void | Error> => {
    
 
   } catch (error) {
-    console.error(error);
+  
     return new Error((error as { message: string }).message || "Erro ao editar o usuário.")
 
   }

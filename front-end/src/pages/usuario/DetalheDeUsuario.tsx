@@ -33,7 +33,6 @@ export const DetalheDeUsuarios: React.FC = () => {
 
   const { id = "novo" } = useParams<"id">();
 
-  console.log(id);
   const navigate = useNavigate();
   const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
 
@@ -70,8 +69,7 @@ export const DetalheDeUsuarios: React.FC = () => {
           navigate("/");
         } else {
           setNome(result.user);
-          formRef.current?.setData(result);
-          console.log(result);
+          formRef.current?.setData(result);          
         }
       });
     } else {

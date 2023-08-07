@@ -18,7 +18,6 @@ import ConfirmSenha from "../../shared/components/confirm-dialog/ConfirmSenha";
 import { TaskService } from "../../shared/services/api/task/TaskService";
 import { useAuthContext } from "../../shared/contexts";
 
-
 interface IFormData {
   title: string;
   description: string;
@@ -32,7 +31,7 @@ const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
 });
 
 export const DetalheDeTarefa: React.FC = () => {
-  const {dadosUser} = useAuthContext()
+  const { dadosUser } = useAuthContext();
   const [open, setOpen] = useState(false);
   const [isMensagem, setIsMensagem] = useState("");
 
@@ -81,25 +80,17 @@ export const DetalheDeTarefa: React.FC = () => {
       setAbrir(false),
         formRef.current?.setData({
           title: "",
-          description: ""
+          description: "",
         });
     }
   }, [id]);
 
   const handleSave = (dados: IFormData) => {
-
     const formData = {
       ...dados,
-      user_id: dadosUser?.id
+      user_id: dadosUser?.id,
     };
-    /*  try {
-      const isValid = formValidationSchema.validate(formData, {
-        abortEarly: false,
-      });
-      console.log("Formulário válido:", isValid);
-    } catch (error) {
-      console.log("Erro de validação:", error);
-    } */
+
     formValidationSchema
       .validate(formData, { abortEarly: false })
       .then((dadosValidados) => {
@@ -150,8 +141,8 @@ export const DetalheDeTarefa: React.FC = () => {
   const handleDelete = (id: string) => {
     TaskService.deleteById(id).then((result) => {
       if (result instanceof Error) {
-      //  alert(result.message);
-      } else {       
+        //  alert(result.message);
+      } else {
         navigate("/tarefas");
       }
     });
@@ -159,7 +150,6 @@ export const DetalheDeTarefa: React.FC = () => {
 
   return (
     <LayoutBaseDePagina
-    
       barraDeFerramentas={
         <FerramentasDeDetalhe
           textoBotaoNovo="Novo"
@@ -207,8 +197,8 @@ export const DetalheDeTarefa: React.FC = () => {
           flexDirection="column"
           component={Paper}
           variant="outlined"
-          justifyContent={'center'}
-          alignContent={'center'}
+          justifyContent={"center"}
+          alignContent={"center"}
         >
           <Grid container direction="column" padding={2} spacing={2}>
             {isLoading && (
@@ -220,8 +210,7 @@ export const DetalheDeTarefa: React.FC = () => {
             <Grid item>
               <Typography variant="h6">Cadastrar Tarefa</Typography>
             </Grid>
-            <Grid container item direction="row" spacing={2} >                         
-  
+            <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                 <Typography
                   sx={{
@@ -243,8 +232,8 @@ export const DetalheDeTarefa: React.FC = () => {
                     id !== "novo" ? isLoading || abrir : isLoading || abrirNovo
                   }
                   style={{
-                    backgroundColor: abrir === true ? "#bfbcc752" : "",  
-                    width: "100%"                    
+                    backgroundColor: abrir === true ? "#bfbcc752" : "",
+                    width: "100%",
                   }}
                   autoFocus
                 />
@@ -262,7 +251,7 @@ export const DetalheDeTarefa: React.FC = () => {
                   Descrição
                 </Typography>
 
-                <VTextField               
+                <VTextField
                   placeholder={"Descrição"}
                   name="description"
                   multiline
@@ -270,18 +259,15 @@ export const DetalheDeTarefa: React.FC = () => {
                   type="text"
                   disabled={
                     id !== "novo" ? isLoading || abrir : isLoading || abrirNovo
-                  }                  
+                  }
                   style={{
-                    backgroundColor: abrir === true ? "#bfbcc752" : "", 
-                    width: "100%"                  
+                    backgroundColor: abrir === true ? "#bfbcc752" : "",
+                    width: "100%",
                   }}
                   autoFocus
                 />
               </Grid>
-
             </Grid>
-
-           
           </Grid>
         </Box>
       </VForm>
